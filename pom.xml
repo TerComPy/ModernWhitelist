@@ -49,7 +49,6 @@
             </resource>
         </resources>
     </build>
-
     <repositories>
         <repository>
             <id>spigotmc-repo</id>
