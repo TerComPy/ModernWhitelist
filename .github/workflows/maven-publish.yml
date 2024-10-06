@@ -24,6 +24,6 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: Публикация готового плагина
-      run: mvn deploy -e -X
+      run: mvn --batch-mode deploy
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
