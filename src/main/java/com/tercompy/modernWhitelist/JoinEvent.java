@@ -34,7 +34,10 @@ public class JoinEvent implements Listener {
                         JavaPlugin.getPlugin(MainClass.class).saveConfig();
                         JavaPlugin.getPlugin(MainClass.class).reloadConfig();
                         Bukkit.getLogger().info(String.format("Администратору %s присвоен IP %s", event.getName(), event.getAddress().getHostAddress()));
-                    }   event.allow();
+                        event.allow();
+                    } else {
+                        event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_WHITELIST, ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(config.getString("denied-ip"))));
+                    }
                 }
                 else {
                     if(Bukkit.getOperators().contains(Bukkit.getOfflinePlayer(event.getUniqueId()))){
