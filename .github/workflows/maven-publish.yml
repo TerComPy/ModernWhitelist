@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  Package-and-releasing-plugin:
 
     runs-on: ubuntu-latest
     permissions:
@@ -34,6 +34,7 @@ jobs:
           name: ModernWhitelist ${{ env.VERSION }}
           body: |
             ## Первый релиз плагина
+            **Были пофикшены все уязвимости, которые я смог обнаружить**
           draft: false
           prerelease: false
           generateReleaseNotes: true
