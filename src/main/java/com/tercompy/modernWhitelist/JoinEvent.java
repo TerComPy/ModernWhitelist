@@ -28,7 +28,7 @@ public class JoinEvent implements Listener {
                 }
             }else{
                 if(MainClass.isVault){
-                    if(MainClass.hasofflinepermis(Bukkit.getOfflinePlayer(event.getUniqueId()), "mw.admin")){
+                    if(MainClass.hasofflinepermis(Bukkit.getOfflinePlayer(event.getUniqueId()), "mw.admin") || Bukkit.getOfflinePlayer(event.getUniqueId()).isOp()){
                         section.set(IP.replace('.', '_'), event.getName());
                         config.set("players", section);
                         JavaPlugin.getPlugin(MainClass.class).saveConfig();
