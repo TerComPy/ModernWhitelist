@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class JoinEvent implements Listener {
@@ -29,6 +30,14 @@ public class JoinEvent implements Listener {
             }else{
                 if(MainClass.isVault){
                     if(MainClass.hasofflinepermis(Bukkit.getOfflinePlayer(event.getUniqueId()), "mw.admin") || Bukkit.getOfflinePlayer(event.getUniqueId()).isOp()){
+                        ArrayList<String> playerlist = new ArrayList<>();
+                        for(String keys: section.getKeys(false)){
+                            playerlist.add(section.getString(keys));
+                        }
+                        if(playerlist.contains(event.getName())){
+                            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_WHITELIST, ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(config.getString("another-ip"))));
+                            return;
+                        }
                         section.set(IP.replace('.', '_'), event.getName());
                         config.set("players", section);
                         JavaPlugin.getPlugin(MainClass.class).saveConfig();
@@ -41,6 +50,14 @@ public class JoinEvent implements Listener {
                 }
                 else {
                     if(Bukkit.getOperators().contains(Bukkit.getOfflinePlayer(event.getUniqueId()))){
+                        ArrayList<String> playerlist = new ArrayList<>();
+                        for(String keys: section.getKeys(false)){
+                            playerlist.add(section.getString(keys));
+                        }
+                        if(playerlist.contains(event.getName())){
+                            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_WHITELIST, ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(config.getString("another-ip"))));
+                            return;
+                        }
                         section.set(IP.replace('.', '_'), event.getName());
                         config.set("players", section);
                         JavaPlugin.getPlugin(MainClass.class).saveConfig();
